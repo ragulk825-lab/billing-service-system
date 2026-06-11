@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Center Management System</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/dark-mode.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>Service Center</h2>
+            <span class="sidebar-toggle">☰</span>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li><a href="#dashboard" data-page="dashboard" class="menu-item active">📊 Dashboard</a></li>
+            <li><a href="#customers" data-page="customers" class="menu-item">👥 Customers</a></li>
+            <li><a href="#billing" data-page="billing" class="menu-item">💳 Billing</a></li>
+            <li><a href="#inventory" data-page="inventory" class="menu-item">📦 Inventory</a></li>
+            <li><a href="#services" data-page="services" class="menu-item">🔧 Services</a></li>
+            <li><a href="#expenses" data-page="expenses" class="menu-item">💰 Expenses</a></li>
+            <li><a href="#reports" data-page="reports" class="menu-item">📈 Reports</a></li>
+            <li><a href="#users" data-page="users" class="menu-item">👨‍💼 Users</a></li>
+            <li><a href="#settings" data-page="settings" class="menu-item">⚙️ Settings</a></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <button id="darkModeToggle" class="dark-mode-btn">🌙 Dark Mode</button>
+            <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="top-bar">
+            <div class="header-left">
+                <h1 id="pageTitle">Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <span id="userInfo" class="user-info">Loading...</span>
+                <span id="currentTime" class="time">00:00:00</span>
+            </div>
+        </header>
+
+        <!-- Page Content Container -->
+        <div class="content-area">
+            <div id="dashboardPage" class="page active">
+                <h2>Dashboard</h2>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Today's Income</div>
+                            <div class="stat-value" id="todayIncome">₹0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💸</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Today's Expenses</div>
+                            <div class="stat-value" id="todayExpenses">₹0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Today's Profit</div>
+                            <div class="stat-value" id="todayProfit">₹0</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏳</div>
+                        <div class="stat-content">
+                            <div class="stat-label">Pending Services</div>
+                            <div class="stat-value" id="pendingServices">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h3>Recent Bills</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Invoice</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentBillsTable">
+                            <tr><td colspan="4">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="dashboard-section">
+                    <h3>Recent Service Activity</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Service ID</th>
+                                <th>Customer</th>
+                                <th>Device Type</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentServicesTable">
+                            <tr><td colspan="4">Loading...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Other pages will be dynamically loaded -->
+            <div id="customersPage" class="page">
+                <h2>Customer Management</h2>
+                <button class="btn btn-primary" id="addCustomerBtn">➕ Add New Customer</button>
+                <div id="customersList"></div>
+            </div>
+
+            <div id="billingPage" class="page">
+                <h2>Billing</h2>
+                <button class="btn btn-primary" id="newBillBtn">➕ Create New Bill</button>
+                <div id="billsList"></div>
+            </div>
+
+            <div id="inventoryPage" class="page">
+                <h2>Inventory Management</h2>
+                <button class="btn btn-primary" id="addProductBtn">➕ Add Product</button>
+                <div id="inventoryList"></div>
+            </div>
+
+            <div id="servicesPage" class="page">
+                <h2>Service Management</h2>
+                <button class="btn btn-primary" id="newServiceBtn">➕ Create Service Ticket</button>
+                <div id="servicesList"></div>
+            </div>
+
+            <div id="expensesPage" class="page">
+                <h2>Expense Management</h2>
+                <button class="btn btn-primary" id="addExpenseBtn">➕ Add Expense</button>
+                <div id="expensesList"></div>
+            </div>
+
+            <div id="reportsPage" class="page">
+                <h2>Reports & Analytics</h2>
+                <div id="reportsList"></div>
+            </div>
+
+            <div id="usersPage" class="page">
+                <h2>User Management</h2>
+                <button class="btn btn-primary" id="addUserBtn">➕ Add User</button>
+                <div id="usersList"></div>
+            </div>
+
+            <div id="settingsPage" class="page">
+                <h2>Settings</h2>
+                <div id="settingsContainer"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modals -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Modal</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div id="modalBody" class="modal-body">
+                <!-- Content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/utils.js"></script>
+</body>
+</html>
